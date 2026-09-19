@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FALCO — Keys of the Geometric Arcana</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#08050f;
+  --ink-2:#0f0a1c;
+  --crimson:#c81f3f;
+  --crimson-glow:#ff3358;
+  --royal:#3f56c8;
+  --royal-glow:#5f7dff;
+  --parchment:#efe6d8;
+  --dim:#a99cc4;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:
+    radial-gradient(ellipse 60% 40% at 20% -10%, rgba(200,31,63,.18), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 85% 0%, rgba(63,86,200,.20), transparent 60%),
+    var(--ink);
+  color:var(--parchment);
+  font-family:'EB Garamond', serif;
+  font-size:18px;
+  line-height:1.5;
+}
+h1,h2,h3,.display{
+  font-family:'Cinzel', serif;
+  letter-spacing:.03em;
+  font-weight:700;
+  margin:0;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+/* ---------- Hero ---------- */
+.hero{padding:64px 0 40px;}
+.hero-top{display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;justify-content:space-between;}
+.hero h1{font-size:clamp(2.4rem,6vw,4rem);color:var(--parchment);text-shadow:0 0 24px rgba(255,51,88,.35);}
+.hero h1 span{color:var(--royal-glow);}
+.hero-sub{max-width:60ch;color:var(--dim);font-size:1.15rem;font-style:italic;margin-top:6px;}
+.hero-note{max-width:62ch;color:var(--dim);font-size:.98rem;border-left:2px solid var(--crimson);padding-left:14px;margin-top:22px;}
+
+/* ---------- Feature key (the Adder) ---------- */
+.feature{
+  margin-top:44px;
+  display:grid;
+  grid-template-columns: 260px 1fr;
+  gap:36px;
+  align-items:start;
+  background:linear-gradient(160deg, rgba(63,86,200,.10), rgba(200,31,63,.08));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:4px;
+  padding:32px;
+}
+@media (max-width:760px){.feature{grid-template-columns:1fr;}}
+
+.feature-card{
+  width:220px;height:308px;
+  perspective:1400px;
+  margin:0 auto;
+}
+.feature-card .top{
+  width:100%;height:100%;
+  position:relative;
+  animation:slowspin 14s linear infinite;
+  transform-style:preserve-3d;
+}
+@keyframes slowspin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.feature-card .face{
+  position:absolute;inset:0;
+  border-radius:10px;
+  border:2px solid var(--royal-glow);
+  box-shadow:0 0 30px rgba(255,51,88,.35), inset 0 0 40px rgba(63,86,200,.35);
+  background:#0a0616;
+  backface-visibility:hidden;
+  overflow:hidden;
+}
+.feature-card svg{width:100%;height:100%;display:block;}
+.feature-key{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:8px 10px 10px;
+  background:linear-gradient(0deg, rgba(5,3,10,.92), transparent);
+  font-family:'Cinzel',serif; font-size:.72rem; letter-spacing:.06em;
+}
+.feature-key b{display:block;color:var(--parchment);font-size:.9rem;}
+.feature-key i{color:var(--dim);font-style:italic;font-family:'EB Garamond',serif;}
+
+.feature-text h2{font-size:1.6rem;margin-bottom:6px;}
+.feature-text p{color:var(--dim);margin:.4em 0 1.1em;max-width:62ch;}
+
+/* the adder demo */
+.adder-demo{margin-top:10px;}
+.adder-row{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin:14px 0;}
+.adder-label{width:180px;font-family:'Cinzel',serif;font-size:.78rem;color:var(--dim);}
+.bit{
+  width:34px;height:34px;border-radius:6px;
+  border:1px solid rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-weight:700;cursor:pointer;
+  background:#160f24; color:var(--dim); user-select:none;
+  transition:background .15s, color .15s, box-shadow .15s;
+}
+.bit.on{background:var(--royal);color:#fff;box-shadow:0 0 14px var(--royal-glow);}
+.carry{width:24px;height:24px;border-radius:50%;border:1px solid rgba(255,255,255,.2);
+  display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--dim);
+  transition:background .12s, box-shadow .12s;}
+.carry.lit{background:var(--crimson);color:#fff;box-shadow:0 0 12px var(--crimson-glow);}
+.sumbits{display:flex;gap:6px;}
+.sumbit{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-family:'Cinzel',serif;font-weight:700;background:#160f24;color:var(--dim);
+  transition:background .12s,box-shadow .12s;}
+.sumbit.lit{background:var(--parchment);color:#100a1c;box-shadow:0 0 10px rgba(239,230,216,.6);}
+.stagelabel{font-size:.72rem;color:var(--dim);font-style:italic;margin-left:8px;}
+.runbtn{
+  font-family:'Cinzel',serif;letter-spacing:.05em;font-size:.8rem;
+  background:transparent;border:1px solid var(--crimson);color:var(--parchment);
+  padding:8px 18px;border-radius:3px;cursor:pointer;margin-top:6px;
+}
+.runbtn:hover{background:var(--crimson);}
+.throughput-readout{margin-top:10px;font-size:.85rem;color:var(--dim);}
+.throughput-readout b{color:var(--parchment);}
+
+/* ---------- Arena grid ---------- */
+.arena-head{margin-top:70px;}
+.arena-head h2{font-size:1.7rem;}
+.arena-head p{color:var(--dim);max-width:64ch;}
+.arena{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(168px,1fr));
+  gap:26px;
+  padding:36px 0 90px;
+  perspective:1000px;
+}
+.card{
+  width:100%;aspect-ratio:5/7;
+  perspective:900px;
+}
+.card .inner{
+  position:relative;width:100%;height:100%;
+  transform-style:preserve-3d;
+  transition:transform .7s cubic-bezier(.2,.7,.3,1);
+  animation:spin 10s linear infinite;
+}
+.card:nth-child(3n) .inner{animation-duration:13s;}
+.card:nth-child(4n) .inner{animation-duration:8s;}
+.card:hover .inner, .card.flipped .inner{animation-play-state:paused;}
+.card.flipped .inner{transform:rotateY(180deg);}
+@keyframes spin{from{transform:rotateY(0)}to{transform:rotateY(360deg)}}
+.face{
+  position:absolute;inset:0;border-radius:8px;
+  border:1.5px solid var(--royal-glow);
+  background:#0a0616;
+  box-shadow:0 0 16px rgba(200,31,63,.25), inset 0 0 24px rgba(63,86,200,.25);
+  backface-visibility:hidden;overflow:hidden;cursor:pointer;
+}
+.face svg{width:100%;height:100%;display:block;}
+.card .back{transform:rotateY(180deg);display:flex;flex-direction:column;padding:12px;}
+.card-key{font-family:'Cinzel',serif;font-size:.66rem;letter-spacing:.08em;color:var(--dim);}
+.card-title{
+  position:absolute;left:0;right:0;bottom:0;padding:6px 8px 8px;
+  font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.03em;
+  background:linear-gradient(0deg, rgba(5,3,10,.9), transparent);
+}
+.card-title b{display:block;font-size:.82rem;color:var(--parchment);}
+.card-title i{color:var(--dim);font-style:italic;font-family:'EB Garamond',serif;font-size:.75rem;}
+.back h3{font-size:.95rem;margin-bottom:6px;color:var(--parchment);}
+.back p{font-size:.78rem;color:var(--dim);flex:1;overflow:auto;}
+.mini-widget{margin-top:6px;}
+.mini-btn{
+  font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.04em;
+  background:transparent;border:1px solid var(--royal-glow);color:var(--parchment);
+  padding:4px 8px;border-radius:3px;cursor:pointer;margin-right:6px;margin-top:4px;
+}
+.mini-btn:hover{background:var(--royal);}
+input[type=range]{width:100%;accent-color:var(--crimson);}
+.km-cell{width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid rgba(255,255,255,.2);font-size:.65rem;cursor:pointer;background:#160f24;color:var(--dim);}
+.km-cell.on{background:var(--crimson);color:#fff;}
+
+footer{border-top:1px solid rgba(255,255,255,.08);padding:26px 0 50px;color:var(--dim);font-size:.85rem;}
+footer i{font-style:italic;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-top">
+      <h1>F A L C O <span>·</span> the geometric arcana</h1>
+    </div>
+    <p class="hero-sub">Twenty Keys, drawn from the old French trumps and dressed in commedia dell'arte — each one a spinning top built from a real tessellation, and each tessellation is a working piece of math or computing you can test with your own hands.</p>
+    <p class="hero-note">Tap any Key to stop its spin and turn it over. The back is the truth beneath the mask — the geometry, and why it matters.</p>
+  </div>
+
+  <!-- FEATURE: KEY I, THE ADDER -->
+  <div class="feature">
+    <div class="feature-card">
+      <div class="top" id="featureTop">
+        <div class="face" id="featureFace"></div>
+      </div>
+    </div>
+    <div class="feature-text">
+      <h2>Key I — Il Bagatto, the Router</h2>
+      <p>The Bagatto is the trickster who moves things faster than the eye can follow. His geometry is a <b>systolic pipeline</b>: a lattice of little processors, each holding a piece of the answer in its own memory cell and passing it on. Below are two ways to add two 4-bit numbers. Ripple-carry solves each digit in order, waiting on the one before it. Carry-lookahead solves every digit's carry at once, in parallel, across the same tessellated grid. Same answer — very different throughput.</p>
+      <div class="adder-demo">
+        <div class="adder-row">
+          <span class="adder-label">A</span>
+          <div class="bit" data-bus="a" data-i="3">1</div>
+          <div class="bit" data-bus="a" data-i="2">1</div>
+          <div class="bit" data-bus="a" data-i="1">0</div>
+          <div class="bit" data-bus="a" data-i="0">1</div>
+        </div>
+        <div class="adder-row">
+          <span class="adder-label">B</span>
+          <div class="bit" data-bus="b" data-i="3">0</div>
+          <div class="bit" data-bus="b" data-i="2">1</div>
+          <div class="bit" data-bus="b" data-i="1">1</div>
+          <div class="bit" data-bus="b" data-i="0">1</div>
+        </div>
+        <button class="runbtn" id="runAdder">spin the pipeline</button>
+        <div class="adder-row">
+          <span class="adder-label">ripple carry &nbsp;(sequential)</span>
+          <div class="carry" id="rc3">c</div><div class="carry" id="rc2">c</div><div class="carry" id="rc1">c</div><div class="carry" id="rc0">c</div>
+          <div class="sumbits" id="rippleSum"></div>
+          <span class="stagelabel" id="rippleTime"></span>
+        </div>
+        <div class="adder-row">
+          <span class="adder-label">carry-lookahead &nbsp;(parallel)</span>
+          <div class="carry" id="lc3">c</div><div class="carry" id="lc2">c</div><div class="carry" id="lc1">c</div><div class="carry" id="lc0">c</div>
+          <div class="sumbits" id="claSum"></div>
+          <span class="stagelabel" id="claTime"></span>
+        </div>
+        <div class="throughput-readout" id="readout">Click a bit to change A or B, then spin the pipeline.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="arena-head">
+    <h2>The remaining nineteen Keys</h2>
+    <p>Every card below is a real tessellation — hex lattices, phyllotaxis spirals, Sierpiński recursion, Voronoi mosaics, Truchet mazes, aperiodic tilings — standing in for a math or computing principle the commedia character embodies. A handful let you test the principle yourself; the rest simply show their work.</p>
+  </div>
+  <div class="arena" id="arena"></div>
+
+  <footer>
+    <p><i>FALCO — the Fool, the Bagatto, and eighteen Keys between them, spinning in crimson and royal blue.</i></p>
+  </footer>
+</div>
+
+<script>
+const CR = '#c81f3f', CRg = '#ff3358', RB = '#3f56c8', RBg = '#5f7dff', PARCH = '#efe6d8';
+
+function svgWrap(inner, vb='0 0 160 220'){
+  return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <rect width="100%" height="100%" fill="#0a0616"/>${inner}</svg>`;
+}
+function hexPts(cx,cy,r){
+  let p=[];
+  for(let i=0;i<6;i++){const a=Math.PI/180*(60*i-30); p.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));}
+  return p.join(' ');
+}
+
+/* ---- tessellation generators ---- */
+function tessHex(rot=0){
+  let s=''; const r=16, dx=r*Math.sqrt(3), dy=r*1.5;
+  for(let row=-1; row<9; row++){
+    for(let col=-1; col<7; col++){
+      const cx = col*dx + (row%2? dx/2:0);
+      const cy = row*dy;
+      const d = Math.hypot(cx-80, cy-110);
+      const op = Math.max(.15, 1-d/140);
+      const fill = (row+col)%2===0 ? CR : RB;
+      s += `<polygon points="${hexPts(cx,cy,r-1.4)}" fill="${fill}" opacity="${op.toFixed(2)}" stroke="#000" stroke-opacity=".2"/>`;
+    }
+  }
+  return svgWrap(`<g transform="rotate(${rot} 80 110)">${s}</g>`);
+}
+function tessTri(){
+  let s=''; const size=20;
+  for(let row=-1;row<13;row++){
+    for(let col=-1;col<10;col++){
+      const x=col*size, y=row*size*0.87;
+      const up = (row+col)%2===0;
+      const pts = up? `${x},${y+17} ${x+10},${y} ${x+20},${y+17}` : `${x},${y} ${x+20},${y} ${x+10},${y+17}`;
+      const fill = (row*7+col*3)%2===0? CR:RB;
+      s+=`<polygon points="${pts}" fill="${fill}" opacity="${(0.35+((row+col)%3)*0.2).toFixed(2)}"/>`;
+    }
+  }
+  return svgWrap(s);
+}
+function tessMatrix(){
+  let s='';
+  for(let row=0;row<9;row++){
+    for(let col=0;col<7;col++){
+      const angle = (row*7+col)*9;
+      const x=col*24+12, y=row*24+12;
+      const fill = (row+col)%2? RB:CR;
+      s+=`<g transform="translate(${x} ${y}) rotate(${angle})"><rect x="-8" y="-8" width="16" height="16" fill="${fill}" opacity="${(0.25+(row/9)*0.5).toFixed(2)}"/></g>`;
+    }
+  }
+  return svgWrap(s);
+}
+function tessSierpinski(depth=5){
+  let s='';
+  function tri(x,y,size,d,flip){
+    if(d===0){
+      const fill = flip? CR:RB;
+      s+=`<polygon points="${x},${y+size} ${x+size/2},${y} ${x+size},${y+size}" fill="${fill}" opacity=".85"/>`;
+      return;
+    }
+    const h=size/2;
+    tri(x,y+h,h,d-1,!flip);
+    tri(x+h/2,y,h,d-1,flip);
+    tri(x+h,y+h,h,d-1,!flip);
+  }
+  tri(0,10,180,depth,true);
+  return svgWrap(s);
+}
+function tessStar(){
+  let s='';
+  for(let row=-1;row<6;row++){
+    for(let col=-1;col<5;col++){
+      const x=col*40+20, y=row*44+22;
+      s+=`<g transform="translate(${x} ${y})">
+        <rect x="-14" y="-14" width="28" height="28" fill="${RB}" opacity=".55" transform="rotate(0)"/>
+        <rect x="-14" y="-14" width="28" height="28" fill="${CR}" opacity=".55" transform="rotate(45)"/>
+      </g>`;
+    }
+  }
+  return svgWrap(s);
+}
+function tessSpiral(angleDeg=137.5, n=140){
+  let s=''; const a = angleDeg*Math.PI/180;
+  for(let i=0;i<n;i++){
+    const r = 4.2*Math.sqrt(i);
+    const t = i*a;
+    const x = 80 + r*Math.cos(t), y=110 + r*Math.sin(t);
+    const fill = i%2? CR:RB;
+    s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(2+i*0.02).toFixed(1)}" fill="${fill}" opacity=".8"/>`;
+  }
+  return svgWrap(s);
+}
+function tessTruchet(seed=1){
+  let s=''; let r=seed;
+  function rnd(){ r = (r*1103515245+12345)%2147483648; return r/2147483648; }
+  const cell=20;
+  for(let row=0;row<11;row++){
+    for(let col=0;col<8;col++){
+      const x=col*cell, y=row*cell;
+      const flip = rnd()>0.5;
+      const c1 = flip? [x,y,x+cell,y+cell] : [x+cell,y,x,y+cell];
+      const col1 = (row+col)%2? RB:CR;
+      s+=`<path d="M${c1[0]},${c1[1]} A${cell},${cell} 0 0 1 ${x+cell/2},${y+cell/2}" stroke="${col1}" stroke-width="2.2" fill="none" opacity=".8"/>`;
+      s+=`<path d="M${c1[2]},${c1[3]} A${cell},${cell} 0 0 1 ${x+cell/2},${y+cell/2}" stroke="${col1==CR?RB:CR}" stroke-width="2.2" fill="none" opacity=".8"/>`;
+    }
+  }
+  return svgWrap(s);
+}
+function tessRings(){
+  let s='';
+  for(let i=14;i>0;i--){
+    const fill = i%2? CR:RB;
+    s+=`<circle cx="80" cy="110" r="${i*9}" fill="none" stroke="${fill}" stroke-width="3" opacity="${(0.15+i*0.02).toFixed(2)}"/>`;
+  }
+  return svgWrap(s);
+}
+function tessTree(depth=8){
+  let s='';
+  function branch(x,y,len,angle,d){
+    if(d===0) return;
+    const x2=x+len*Math.cos(angle), y2=y+len*Math.sin(angle);
+    const c = d>4? RB:CR;
+    s+=`<line x1="${x}" y1="${y}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${(d*0.6).toFixed(1)}" opacity=".8" stroke-linecap="round"/>`;
+    branch(x2,y2,len*0.78,angle-0.45,d-1);
+    branch(x2,y2,len*0.78,angle+0.45,d-1);
+  }
+  branch(80,215,42,-Math.PI/2,depth);
+  return svgWrap(s);
+}
+function tessVoronoi(seed=2){
+  let s=''; let r=seed;
+  function rnd(){ r=(r*1103515245+12345)%2147483648; return r/2147483648; }
+  const pts=[];
+  for(let i=0;i<16;i++) pts.push([rnd()*160, rnd()*220]);
+  for(const [x,y] of pts){
+    const rad = 10+rnd()*14;
+    const fill = rnd()>0.5? CR:RB;
+    s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${rad.toFixed(1)}" fill="${fill}" opacity=".28"/>`;
+    s+=`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2" fill="${PARCH}" opacity=".7"/>`;
+  }
+  return svgWrap(s);
+}
+function tessFourColor(seed=3){
+  let s=''; let r=seed;
+  function rnd(){ r=(r*1103515245+12345)%2147483648; return r/2147483648; }
+  const cols=[CR,RB,'#e0b84a','#4ac0a0'];
+  for(let row=0;row<7;row++){
+    for(let col=0;col<6;col++){
+      const jitter = rnd()*8-4;
+      const x=col*28, y=row*32;
+      const c = cols[(row+col+Math.floor(rnd()*2))%4];
+      s+=`<rect x="${x+jitter}" y="${y}" width="30" height="34" fill="${c}" opacity=".55" rx="3"/>`;
+    }
+  }
+  return svgWrap(s);
+}
+function tessHypercube(){
+  const s = `
+    <rect x="30" y="60" width="60" height="60" fill="none" stroke="${RB}" stroke-width="2.5"/>
+    <rect x="65" y="95" width="60" height="60" fill="none" stroke="${CR}" stroke-width="2.5"/>
+    <line x1="30" y1="60" x2="65" y2="95" stroke="${PARCH}" stroke-width="1.3" opacity=".7"/>
+    <line x1="90" y1="60" x2="125" y2="95" stroke="${PARCH}" stroke-width="1.3" opacity=".7"/>
+    <line x1="30" y1="120" x2="65" y2="155" stroke="${PARCH}" stroke-width="1.3" opacity=".7"/>
+    <line x1="90" y1="120" x2="125" y2="155" stroke="${PARCH}" stroke-width="1.3" opacity=".7"/>`;
+  return svgWrap(s);
+}
+function tessPipeline(){
+  let s='';
+  for(let col=0;col<6;col++){
+    for(let row=0;row<7;row++){
+      const x=col*26+8, y=row*30+8;
+      const c = col%2? RB:CR;
+      s+=`<rect x="${x}" y="${y}" width="20" height="22" fill="${c}" opacity=".5" rx="2">
+        <animate attributeName="opacity" values=".2;.85;.2" dur="2.4s" begin="${col*0.25}s" repeatCount="indefinite"/>
+      </rect>`;
+    }
+    if(col<5) s+=`<line x1="${col*26+30}" y1="115" x2="${col*26+34}" y2="115" stroke="${PARCH}" stroke-width="1.5" opacity=".5"/>`;
+  }
+  return svgWrap(s);
+}
+function tessPenrose(){
+  let s=''; const thin=[36,144], fat=[72,108];
+  function rhomb(cx,cy,size,angleDeg,acute,fill){
+    const a = acute*Math.PI/180/2;
+    const pts=[[0,0],[size*Math.cos(a),size*Math.sin(a)],[size*Math.cos(a)*2,0],[size*Math.cos(a),-size*Math.sin(a)]];
+    const rad = angleDeg*Math.PI/180;
+    const tp = pts.map(([x,y])=>{
+      const rx=x*Math.cos(rad)-y*Math.sin(rad), ry=x*Math.sin(rad)+y*Math.cos(rad);
+      return (cx+rx).toFixed(1)+','+(cy+ry).toFixed(1);
+    }).join(' ');
+    s+=`<polygon points="${tp}" fill="${fill}" opacity=".7" stroke="#000" stroke-opacity=".25"/>`;
+  }
+  let i=0;
+  for(let row=0;row<6;row++){
+    for(let col=0;col<5;col++){
+      const cx=col*34+10, cy=row*38+14;
+      const acuteDeg = (row+col)%2? 36:72;
+      rhomb(cx,cy,20,(i*36)%360,acuteDeg, (i%2)? CR:RB);
+      i++;
+    }
+  }
+  return svgWrap(s);
+}
+function tessQuanta(){
+  let s='';
+  for(let i=0;i<10;i++){
+    const cx=20+ (i*13)%140, cy=20+((i*37)%180);
+    const fill = i%2? CR:RB;
+    s+=`<circle cx="${cx}" cy="${cy}" r="${20+((i*7)%14)}" fill="${fill}" opacity=".18"/>`;
+    s+=`<circle cx="${cx}" cy="${cy}" r="2.4" fill="${PARCH}" opacity=".8"/>`;
+  }
+  return svgWrap(s);
+}
+function tessSnub(){
+  let s='';
+  for(let row=0;row<9;row++){
+    for(let col=0;col<7;col++){
+      const x=col*22, y=row*22 + (col%2?11:0);
+      const fill=(row+col)%2? RB:CR;
+      s+=`<rect x="${x+2}" y="${y+2}" width="16" height="16" fill="${fill}" opacity=".55" transform="rotate(${(row*col*13)%45} ${x+10} ${y+10})"/>`;
+    }
+  }
+  return svgWrap(s);
+}
+
+/* ---- card data ---- */
+const cards = [
+  {key:'0', title:'Il Matto', sub:'the Fool — every Key at once', tess:()=>tessStar(),
+   h:'All Keys, unopened', text:'The Fool carries the whole deck folded into one pattern — an eight-point star tiling, the same motif that lets you cover a plane with no gaps using only squares rotated 45°. He spins fastest because he has committed to nothing yet.'},
+  {key:'II', title:'La Papessa', sub:'keeper of the ring', tess:()=>tessRings(),
+   h:'Modular arithmetic', text:'Her rings are a clock face pushed outward. Any number wraps back to the start after N steps — this is modular arithmetic, the math behind clocks, checksums, and hash tables.', interactive:'mod'},
+  {key:'III', title:"L'Imperatrice", sub:'grower of the spiral', tess:()=>tessSpiral(),
+   h:'The golden angle', text:'Sunflower seeds, pinecones, and this card all pack points using the same irrational turn: 137.5°, the golden angle. It is the turn that never lets two points line up, so nothing overlaps and nothing is wasted.', interactive:'spiral'},
+  {key:'IV', title:"L'Imperatore", sub:'ruler of the grid', tess:()=>tessMatrix(),
+   h:'Rotation matrices', text:'Each tile is the same square, rotated a little more than the last by a fixed matrix multiplication. Apply the same 2×2 rotation matrix repeatedly and you sweep an entire field — this is how graphics engines spin objects every frame.'},
+  {key:'V', title:'Il Papa', sub:'reader of the triangle', tess:()=>tessSierpinski(5),
+   h:"Pascal's triangle, mod 2", text:"Colour every odd number in Pascal's triangle one colour and every even number another and you get this exact fractal — the Sierpiński triangle. It is also what you get from repeated XOR, the simplest gate in a computer."},
+  {key:'VI', title:'Gli Amanti', sub:'choosers of the path', tess:(s)=>tessTruchet(s),
+   h:'Truchet tiles', text:'Only two tiles exist here — a quarter-arc, and its mirror. Place them down at random and a maze appears that no one designed. Complexity from a coin flip, repeated.', interactive:'truchet', seed:4},
+  {key:'VII', title:'Il Carro', sub:'driver of the pipeline', tess:()=>tessPipeline(),
+   h:'Pipelining & throughput', text:"Each column is a stage that starts its own work the instant the stage before it finishes — like a factory line, not a single craftsman. No single piece moves faster, but many pieces finish per second. This is how real chips trade memory for speed."},
+  {key:'VIII', title:'La Giustizia', sub:'weigher of the map', tess:()=>tessMatrix(),
+   h:'Karnaugh maps', text:'Toggle the four squares to build any 2-input logic function, then watch which ones can be circled together — adjacent matching squares mean the logic simplifies. This is how engineers shrink circuits before they are ever built.', interactive:'karnaugh'},
+  {key:'IX', title:"L'Eremita", sub:'lantern of the automaton', tess:()=>tessTree(3),
+   h:'Cellular automata', text:'One rule, applied to a row of cells, generation after generation. Rule 30 alone produces patterns so irregular they have been used as a random-number generator. Step it forward and watch order become noise.', interactive:'rule30'},
+  {key:'X', title:'La Ruota', sub:'turner of symmetry', tess:()=>tessSnub(),
+   h:'Symmetry groups', text:'Turn the wheel and most angles look wrong — only a handful bring the shape back into alignment with itself. Those special angles are its symmetry group, the same idea that classifies every possible tessellation of the plane.', interactive:'dihedral'},
+  {key:'XI', title:'La Forza', sub:'binder of the lattice', tess:()=>tessHex(12),
+   h:'Load-bearing lattices', text:'The hexagon is the loudest shape in nature for a reason: it tiles perfectly with no wasted material and spreads force evenly to all six neighbours. Honeycombs, carbon atoms, and camera-sensor grids all choose it for the same math.'},
+  {key:'XII', title:"L'Appeso", sub:'seer of nearest ground', tess:(s)=>tessVoronoi(s),
+   h:'Voronoi diagrams', text:'Every dot owns the territory closer to it than to any other dot. That territory map is a Voronoi diagram — it is how phone towers claim coverage areas and how nearest-neighbour search works underneath the hood.', seed:5},
+  {key:'XIII', title:'La Morte', sub:'pattern that never repeats', tess:()=>tessPenrose(),
+   h:'Aperiodic tiling', text:'These tiles cover the whole plane and yet the pattern never repeats itself, anywhere, ever — a Penrose tiling. It proves order does not require repetition, which is exactly the property that makes some materials (quasicrystals) possible.'},
+  {key:'XIV', title:'La Temperanza', sub:'mixer of dimensions', tess:()=>tessHypercube(),
+   h:'The hypercube', text:'Two squares, corners joined, is the shadow a 4-dimensional cube casts into our 3. Networks of processors are wired the same way — a hypercube topology — so any two can reach each other in very few hops.'},
+  {key:'XV', title:'Il Diavolo', sub:'colourer of borders', tess:(s)=>tessFourColor(s),
+   h:'The four colour theorem', text:'However these regions are drawn, four colours are always enough to keep every border between two different colours. It took over a century to prove — and a computer had to check the hardest cases.', seed:6},
+  {key:'XVI', title:'La Torre', sub:'branch that always splits', tess:()=>tessTree(9),
+   h:'Binary trees', text:"Every branch becomes exactly two branches — the same rule a search tree uses to cut a haystack in half, then in half again, until the needle is the only thing left standing."},
+  {key:'XVII', title:'Le Stelle', sub:'many places at once', tess:()=>tessQuanta(),
+   h:'Superposition', text:'Each glow marks a place a thing might be found, all held at once until something forces an answer. It is a loose picture of superposition — the part of quantum mechanics that makes quantum computers fundamentally different from ordinary ones.'},
+  {key:'XVIII', title:'La Luna', sub:'the shortcut through folded space', tess:()=>tessRings(),
+   h:'Graph shortcuts', text:"A wormhole is just a shortcut edge stitched between two far-apart points. Skip lists and small-world networks use exactly this trick — a few long-range links that turn a slow crawl across a graph into a couple of jumps."},
+  {key:'XIX', title:'Il Sole', sub:'the tiling that wastes nothing', tess:()=>tessTri(),
+   h:'Tiling & area', text:'Triangles are the simplest shape that can tile a plane with no gaps and no overlaps, and every polygon can be broken down into them — which is exactly why every 3D model your computer renders is built from triangles.'},
+];
+
+function buildCard(c, idx){
+  const div = document.createElement('div');
+  div.className='card';
+  const svgHTML = c.tess(c.seed);
+  let backExtra = '';
+  if(c.interactive) backExtra = `<div class="mini-widget" id="mw-${idx}"></div>`;
+  div.innerHTML = `
+    <div class="inner">
+      <div class="face front">
+        ${svgHTML}
+        <div class="card-title"><b>${c.title}</b><i>${c.sub}</i></div>
+      </div>
+      <div class="face back">
+        <div class="card-key">KEY ${c.key}</div>
+        <h3>${c.h}</h3>
+        <p>${c.text}</p>
+        ${backExtra}
+      </div>
+    </div>`;
+  div.querySelector('.front').addEventListener('click', ()=> div.classList.toggle('flipped'));
+  div.querySelector('.back').addEventListener('click', ()=> div.classList.toggle('flipped'));
+  document.getElementById('arena').appendChild(div);
+  const titleHTML = `<div class="card-title"><b>${c.title}</b><i>${c.sub}</i></div>`;
+  if(c.interactive) setTimeout(()=>initInteractive(c.interactive, idx, div, titleHTML),0);
+}
+cards.forEach(buildCard);
+
+function initInteractive(type, idx, cardDiv, titleHTML){
+  const mount = document.getElementById('mw-'+idx);
+  if(type==='mod'){
+    mount.innerHTML = `<label style="font-size:.7rem">base N: <span id="modval-${idx}">12</span></label>
+      <input type="range" min="2" max="16" value="12" id="modslide-${idx}">
+      <div id="modout-${idx}" style="font-size:.68rem;color:var(--dim);margin-top:4px;"></div>`;
+    const draw=()=>{
+      const n = +document.getElementById('modslide-'+idx).value;
+      document.getElementById('modval-'+idx).textContent = n;
+      let seq=[];
+      for(let i=0;i<24;i++) seq.push(i%n);
+      document.getElementById('modout-'+idx).textContent = seq.join(' ');
+      cardDiv.querySelector('.front').innerHTML = tessRingsN(n) + titleHTML;
+    };
+    document.getElementById('modslide-'+idx).addEventListener('input', draw);
+    draw();
+  }
+  if(type==='spiral'){
+    mount.innerHTML = `<label style="font-size:.7rem">turn angle: <span id="spval-${idx}">137.5</span>°</label>
+      <input type="range" min="80" max="180" step="0.5" value="137.5" id="spslide-${idx}">`;
+    const draw=()=>{
+      const a = +document.getElementById('spslide-'+idx).value;
+      document.getElementById('spval-'+idx).textContent = a;
+      cardDiv.querySelector('.front').innerHTML = tessSpiral(a) + titleHTML;
+    };
+    document.getElementById('spslide-'+idx).addEventListener('input', draw);
+    draw();
+  }
+  if(type==='truchet'){
+    mount.innerHTML = `<button class="mini-btn" id="tbtn-${idx}">shuffle the tiles</button>`;
+    document.getElementById('tbtn-'+idx).addEventListener('click', ()=>{
+      const seed = Math.floor(Math.random()*99999)+1;
+      cardDiv.querySelector('.front').innerHTML = tessTruchet(seed) + titleHTML;
+    });
+  }
+  if(type==='karnaugh'){
+    mount.innerHTML = `<div style="font-size:.66rem;margin-bottom:4px;">click cells to set a function; matched pairs simplify</div>
+      <div id="kmgrid-${idx}"></div><div id="kmread-${idx}" style="font-size:.66rem;color:var(--dim);margin-top:4px;"></div>`;
+    const grid = document.getElementById('kmgrid-'+idx);
+    const state=[0,0,0,0];
+    function render(){
+      grid.innerHTML='';
+      const labels=['00','01','11','10'];
+      state.forEach((v,i)=>{
+        const cell=document.createElement('span');
+        cell.className='km-cell'+(v?' on':'');
+        cell.textContent=labels[i];
+        cell.addEventListener('click',()=>{state[i]=state[i]?0:1; render();});
+        grid.appendChild(cell);
+      });
+      let pairs=0;
+      for(let i=0;i<4;i++) if(state[i] && state[(i+1)%4]) pairs++;
+      document.getElementById('kmread-'+idx).textContent = pairs+' adjacent pair(s) — each pair drops one variable from the final expression.';
+    }
+    render();
+  }
+  if(type==='rule30'){
+    mount.innerHTML = `<div style="font-size:.66rem;">rule: <input type="number" id="rnum-${idx}" value="30" min="0" max="255" style="width:44px;background:#160f24;color:#efe6d8;border:1px solid #444;"> <button class="mini-btn" id="rstep-${idx}">step</button> <button class="mini-btn" id="rreset-${idx}">reset</button></div>`;
+    let gen=[Array(15).fill(0)]; gen[0][7]=1;
+    function drawGen(){
+      let s='';
+      gen.forEach((row,r)=>{
+        row.forEach((v,c)=>{
+          if(v) s+=`<rect x="${c*10.6}" y="${r*13}" width="10" height="12" fill="${(r+c)%2?CR:RB}"/>`;
+        });
+      });
+      cardDiv.querySelector('.front').innerHTML = svgWrap(s) + titleHTML;
+    }
+    function step(){
+      const rule = +document.getElementById('rnum-'+idx).value;
+      const last = gen[gen.length-1];
+      const next = last.map((_,i)=>{
+        const l=last[(i-1+last.length)%last.length], c=last[i], r=last[(i+1)%last.length];
+        const pattern = (l<<2)|(c<<1)|r;
+        return (rule>>pattern)&1;
+      });
+      gen.push(next);
+      if(gen.length>17) gen.shift();
+      drawGen();
+    }
+    document.getElementById('rstep-'+idx).addEventListener('click', step);
+    document.getElementById('rreset-'+idx).addEventListener('click', ()=>{gen=[Array(15).fill(0)]; gen[0][7]=1; drawGen();});
+    drawGen();
+  }
+  if(type==='dihedral'){
+    mount.innerHTML = `<label style="font-size:.7rem">rotate: <span id="dval-${idx}">0</span>°</label>
+      <input type="range" min="0" max="359" value="0" id="dslide-${idx}">
+      <div id="dread-${idx}" style="font-size:.64rem;color:var(--dim);"></div>`;
+    const n=6;
+    const draw=()=>{
+      const a = +document.getElementById('dslide-'+idx).value;
+      document.getElementById('dval-'+idx).textContent=a;
+      const symmetric = Math.abs((a % (360/n))) < 3 || Math.abs((a % (360/n))-(360/n)) < 3;
+      document.getElementById('dread-'+idx).textContent = symmetric? 'aligned — a symmetry of order '+n : "not aligned to the hexagon's symmetry";
+      cardDiv.querySelector('.front').innerHTML = tessSnubRot(a) + titleHTML;
+    };
+    document.getElementById('dslide-'+idx).addEventListener('input', draw);
+    draw();
+  }
+}
+function tessRingsN(n){
+  let s='';
+  for(let i=0;i<n;i++){
+    const fill = i%2? CR:RB;
+    const r = 14 + i*(90/n);
+    s+=`<circle cx="80" cy="110" r="${r}" fill="none" stroke="${fill}" stroke-width="3" opacity=".6"/>`;
+  }
+  return svgWrap(s);
+}
+function tessSnubRot(a){
+  let s=`<g transform="rotate(${a} 80 110)">`;
+  s+=`<polygon points="${hexPts(80,110,70)}" fill="none" stroke="${RB}" stroke-width="2"/>`;
+  s+=`<polygon points="${hexPts(80,110,70)}" fill="${CR}" opacity=".2"/>`;
+  s+='</g>';
+  return svgWrap(s);
+}
+
+/* ---- feature card (Il Bagatto) visual ---- */
+document.getElementById('featureFace').innerHTML = tessPipeline() + `<div class="feature-key"><b>Key I — Il Bagatto</b><i>the Router, master of throughput</i></div>`;
+
+/* ---- adder logic ---- */
+function readBus(bus){
+  return [3,2,1,0].map(i=>+document.querySelector(`.bit[data-bus="${bus}"][data-i="${i}"]`).classList.contains('on'));
+}
+document.querySelectorAll('.bit').forEach(b=>{
+  const startsOn = b.textContent.trim()==='1';
+  if(startsOn) b.classList.add('on');
+  b.textContent = startsOn ? '1' : '0';
+  b.addEventListener('click', ()=>{
+    b.classList.toggle('on');
+    b.textContent = b.classList.contains('on') ? '1' : '0';
+  });
+});
+
+document.getElementById('runAdder').addEventListener('click', ()=>{
+  const A = readBus('a'), B = readBus('b'); // index 0 = MSB..
+  const a = [A[3],A[2],A[1],A[0]]; // LSB first: a[0]..a[3]
+  const b = [B[3],B[2],B[1],B[0]];
+
+  // ripple carry, animated sequentially
+  let carry=0, rsum=[], rc=[];
+  for(let i=0;i<4;i++){
+    const s = a[i]^b[i]^carry;
+    rsum.push(s);
+    carry = (a[i]&b[i]) | (carry&(a[i]^b[i]));
+    rc.push(carry);
+  }
+  const rippleSumEl = document.getElementById('rippleSum');
+  rippleSumEl.innerHTML = rsum.slice().reverse().map(()=>`<div class="sumbit"></div>`).join('');
+  ['rc0','rc1','rc2','rc3'].forEach(id=>document.getElementById(id).classList.remove('lit'));
+  rippleSumEl.querySelectorAll('.sumbit').forEach(el=>el.classList.remove('lit'));
+
+  rc.forEach((c,i)=>{
+    setTimeout(()=>{
+      if(c) document.getElementById('rc'+i).classList.add('lit');
+      const sumEls = rippleSumEl.querySelectorAll('.sumbit');
+      sumEls[3-i].textContent = rsum[i];
+      if(rsum[i]) sumEls[3-i].classList.add('lit');
+    }, i*420);
+  });
+  document.getElementById('rippleTime').textContent = '4 sequential steps · ~4x gate delay';
+
+  // carry lookahead: all carries computed in parallel from generate/propagate
+  const g = a.map((v,i)=>v&b[i]);
+  const p = a.map((v,i)=>v^b[i]);
+  const c0=0;
+  const c1 = g[0] | (p[0]&c0);
+  const c2 = g[1] | (p[1]&g[0]) | (p[1]&p[0]&c0);
+  const c3 = g[2] | (p[2]&g[1]) | (p[2]&p[1]&g[0]) | (p[2]&p[1]&p[0]&c0);
+  const claC = [c1,c2,c3];
+  const claSumVals = p.map((v,i)=>v ^ [c0,c1,c2,c3][i]);
+  const claSumEl = document.getElementById('claSum');
+  claSumEl.innerHTML = claSumVals.slice().reverse().map(()=>`<div class="sumbit"></div>`).join('');
+  ['lc0','lc1','lc2','lc3'].forEach(id=>document.getElementById(id).classList.remove('lit'));
+  claSumEl.querySelectorAll('.sumbit').forEach(el=>el.classList.remove('lit'));
+
+  setTimeout(()=>{
+    [c1,c2,c3].forEach((c,i)=>{ if(c) document.getElementById('lc'+(i+1)).classList.add('lit'); });
+    const sumEls = claSumEl.querySelectorAll('.sumbit');
+    claSumVals.forEach((v,i)=>{ sumEls[3-i].textContent=v; if(v) sumEls[3-i].classList.add('lit'); });
+  }, 420);
+  document.getElementById('claTime').textContent = '1 parallel step · same answer, ~4x fewer waits';
+
+  const aNum = a[3]*8+a[2]*4+a[1]*2+a[0];
+  const bNum = b[3]*8+b[2]*4+b[1]*2+b[0];
+  const total = aNum+bNum;
+  document.getElementById('readout').innerHTML = `<b>${aNum} + ${bNum} = ${total}</b> — both circuits agree on the answer. The lattice on top waits for its neighbour before it can move; the lattice on the bottom pre-computes every carry from A and B directly, so all four digits settle together. That's throughput bought with a few extra gates of memory.`;
+});
+document.getElementById('runAdder').click();
+</script>
+</body>
+</html>
